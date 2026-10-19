@@ -1,13 +1,14 @@
 # Hemobrás — Novo organograma / Hemo TV
 
-Piloto v3 em Remotion 4.0.536, React, TypeScript e SVG. A composição
+Piloto v4 em Remotion 4.0.536, React, TypeScript e SVG. A composição
 `HemobrasAbertura` tem 70 segundos, 1920 × 1080, 30 fps e nenhum áudio.
 
 A base visual combina a abertura em vinho de `PRESIDENCIA-ORGAN-v2.mp4` com
 navegação contínua, zoom, destaques e legendas de
-`hemotv-video1-novo-organograma.mp4`. A v3 acrescenta traçado progressivo das conexões, pontas em movimento e
-áreas que aparecem em 100% antes de reduzir sua opacidade. O Superplasma aparece na abertura,
-na chamada da Presidência e no encerramento. O usuário não aprovou o piloto v2. Esta revisão continua para avaliação,
+`hemotv-video1-novo-organograma.mp4`. Na v4, cada ligação é desenhada uma única vez e a ponta para ao chegar à
+área; não há pulsos repetidos nas conexões prontas. As áreas aparecem em
+100% antes de reduzir sua opacidade. O Superplasma aparece na abertura,
+na chamada da Presidência e no encerramento. O usuário não aprovou os pilotos anteriores. Esta revisão continua para avaliação,
 sem aprovação automática do piloto. Os outros três vídeos
 aguardam a aprovação explícita deste piloto.
 
@@ -45,7 +46,7 @@ limitada BT.709, CRF 18, faststart e ausência de áudio. Concorrência 2.
 - MP4 final: `out/hemobras/01-abertura-revisao.mp4`.
 - Auditoria: `out/hemobras/validation.json`.
 - Quadros de revisão: `out/hemobras/review/`.
-- Entrega v3: `entregas/hemobras-piloto-v3.mp4` quando publicada.
+- Entrega v4: `entregas/hemobras-piloto-v4.mp4` quando publicada.
 
 A validação verifica resolução, duração, taxas média e nominal de quadros,
 2.100 quadros decodificados, ausência de áudio, formato de pixel e cor.
@@ -114,6 +115,19 @@ npm run validate:piloto
 Os quatro roteiros são abertura, Industrial, Qualidade e Suprimentos, e
 Gestão Corporativa e Financeira. Apenas o primeiro está implementado.
 As versões anteriores foram preservadas em
-`entregas/hemobras-piloto-revisao.mp4` e `entregas/hemobras-piloto-v2.mp4`.
-Veja `docs/revisao-v3.md` para o feedback e as mudanças da revisão atual. O projeto inicial `MotionIntro`
+`entregas/hemobras-piloto-revisao.mp4`, `entregas/hemobras-piloto-v2.mp4`
+e `entregas/hemobras-piloto-v3.mp4`.
+Veja `docs/revisao-v4.md` para o feedback e as mudanças da revisão atual. O projeto inicial `MotionIntro`
 também foi preservado como composição separada.
+
+## Verificação da ausência de repetição
+
+```bash
+node scripts/review-connections.mjs
+python scripts/validate-connection-stills.py
+```
+
+A comparação opcional dos PNGs requer Pillow. Ela verifica que o gráfico
+permanece idêntico em pausas com a câmera e a opacidade estáveis. O teste
+`check:motion` também percorre todos os quadros posteriores à chegada das
+39 conexões para impedir recomeços e pulsos.

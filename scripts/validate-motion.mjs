@@ -42,6 +42,19 @@ for(const id of ['pessoas-comite','cadm','secretaria','gabinete','estrategica'])
   const from=arrivalFor(id).show+MOTION.cardWipe+1;
   for(let frame=from;frame<1860;frame++) assert.ok(Math.abs(nodeMotion(frame,id).opacity-nodeMotion(frame-1,id).opacity)<.08,`Salto de opacidade em ${id}: ${frame}`);
 }
-const flow=connectionMotion(849,'seguranca').flow;
-assert.ok(flow && flow.progress>0 && flow.progress<1,'Pulso de direção ausente no período de leitura');
-console.log(`Movimento validado: ${nodes} áreas iniciam em 100%; ${edges} conexões desenham e movem suas pontas; fades e retomadas contínuos.`);
+// Regressão da v3: não deve haver pulsos ou reinício depois de conectar.
+let frozen=0;
+for(const [id,points] of Object.entries(routes)) {
+  if(points.length<2) continue;
+  const plan=arrivalFor(id);const end=plan.edgeStart+plan.edgeDuration;
+  const connected=connectionMotion(end,id);
+  for(let f=end;f<2100;f++) {
+    const current=connectionMotion(f,id);
+    close(current.draw,1);
+    close(current.tip.x,connected.tip.x);close(current.tip.y,connected.tip.y);
+    close(current.tip.angle,connected.tip.angle);
+    assert.ok(!('flow' in current),'Conexão concluída não deve emitir pulsos');
+  }
+  frozen++;
+}
+console.log(`Movimento validado: ${nodes} áreas iniciam em 100%; ${edges} conexões desenham uma vez; ${frozen} pontas permanecem imóveis após conectar; fades contínuos.`);

@@ -1,26 +1,25 @@
 # Piloto Hemobrás — revisão
 
-## Revisão atual: v3
+## Revisão atual: v4
 
-O piloto ainda **não está aprovado**. O usuário considerou o tempo de leitura
-adequado, mas pediu mais movimento nas conexões e a apresentação das áreas
-em 100% de opacidade antes do esmaecimento.
+O piloto ainda **não está aprovado**. A v4 retira os pulsos que se repetiam
+nas ligações já formadas. A seta desenha a conexão uma vez, chega à área
+e para; voltar o foco não reinicia o movimento.
 
-- [Vídeo v3: setas em movimento e opacidade animada](hemobras-piloto-v3.mp4)
-- [Quadro da apresentação integral das áreas](hemobras-piloto-v3-poster.png)
-- [Projeto editável v3 em ZIP](hemobras-piloto-fonte-v3.zip)
+- [Trecho de 10 segundos para conferir as conexões](hemobras-v4-trecho-conexoes.mp4)
+- [Vídeo v4 completo](hemobras-piloto-v4.mp4)
+- [Projeto editável v4](hemobras-piloto-fonte-v4.zip)
 
-Full HD, 30 fps, H.264, 70 segundos, sem áudio. A abertura, o Superplasma e
-os intervalos das cenas e legendas da v2 foram preservados. As conexões são
-desenhadas e suas pontas percorrem os caminhos do organograma; as áreas
-aparecem em 100% e depois reduzem gradualmente a opacidade.
+O vídeo completo mantém 70 segundos, Full HD, 30 fps, H.264 e nenhum áudio.
+Abertura, Superplasma, leitura e animação de opacidade foram preservados.
+O trecho corresponde aos segundos 26–36 do vídeo completo; não é outro
+vídeo da série, mas um recorte para revisão.
 
 No GitHub, abra o MP4 e use **Download raw file** para baixar e assistir.
-Os três vídeos seguintes continuam aguardando aprovação explícita do piloto.
+Os demais três vídeos aguardam aprovação explícita do piloto.
 
-## Histórico preservado
+## Histórico
 
-- `hemobras-piloto-revisao.mp4`: primeira versão, sem o personagem.
-- `hemobras-piloto-v2.mp4`: abertura em vinho e Superplasma; versão rejeitada
-  quanto ao resultado visual, com tempo de leitura considerado bom.
-- `hemobras-piloto-fonte-v2.zip`: fontes da versão anterior.
+As entregas v1, v2 e v3 e seus projetos foram preservados. A v3 continha os
+pulsos recorrentes que motivaram o feedback atual. Para avaliar a correção,
+use os arquivos com v4 no nome.

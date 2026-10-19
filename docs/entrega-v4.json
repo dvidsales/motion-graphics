@@ -1,0 +1,21 @@
+{
+  "versao": 4,
+  "aprovacao": "pendente",
+  "alteracao": "Cada conexão é desenhada uma vez e permanece imóvel após conectar.",
+  "trecho_segundos": [
+    26,
+    36
+  ],
+  "arquivos": [
+    {
+      "arquivo": "entregas/hemobras-piloto-v4.mp4",
+      "bytes": 6792693,
+      "sha256": "581e2e3106b704e68650dd441ea9fdbeee42ff69eb914ce18a71998565b1bcbc"
+    },
+    {
+      "arquivo": "entregas/hemobras-v4-trecho-conexoes.mp4",
+      "bytes": 1212793,
+      "sha256": "337998fd79c0744cb8c688d1688fd28bbae0555888f58f03b479dbf8bbde595b"
+    }
+  ]
+}

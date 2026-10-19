@@ -1,7 +1,7 @@
 import {interpolateColors, useCurrentFrame} from 'remotion';
 import {cameraAt} from '../camera';
 import {connector, labelFor, layout} from '../data/layout';
-import {connectionMotion, hasDashedConnection, nodeMotion, pointOnPath, routes} from '../motion';
+import {connectionMotion, hasDashedConnection, nodeMotion, routes} from '../motion';
 const RED='#8c1228';
 export const wrapLabel=(text:string,width:number,size:number)=>{
   const max=Math.floor((width-52)/(size*.58)); const lines:string[]=[]; let current='';
@@ -20,7 +20,10 @@ export function CameraDiagram({ghost=false}:{ghost?:boolean}) {
         const motion=nodeMotion(frame,n.id); const edge=connectionMotion(frame,n.id); const d=connector(n.id);
         return <g key={n.id}>
           <clipPath id={`card-wipe-${n.id}`}><rect x={n.x-4} y={n.y-4} width={(n.w+8)*motion.wipe} height={n.h+8}/></clipPath>
-          {d && <mask id={`edge-draw-${n.id}`} maskUnits="userSpaceOnUse" x={-2000} y={-1000} width={10000} height={7000}>
+          {d && edge.draw>0 && edge.draw<1 && <mask id={`edge-draw-${n.id}`} maskUnits="userSpaceOnUse"
+            x={Math.min(...routes[n.id].map(p=>p.x))-24} y={Math.min(...routes[n.id].map(p=>p.y))-24}
+            width={Math.max(...routes[n.id].map(p=>p.x))-Math.min(...routes[n.id].map(p=>p.x))+48}
+            height={Math.max(...routes[n.id].map(p=>p.y))-Math.min(...routes[n.id].map(p=>p.y))+48}>
             <path d={d} fill="none" stroke="white" strokeWidth={24} strokeLinecap="round" pathLength={1} strokeDasharray="1 1" strokeDashoffset={1-edge.draw}/>
           </mask>}
         </g>;
@@ -30,19 +33,13 @@ export function CameraDiagram({ghost=false}:{ghost?:boolean}) {
       {layout.filter(n=>connector(n.id)).map(n=>{
         const edge=connectionMotion(frame,n.id); const node=nodeMotion(frame,n.id); const d=connector(n.id);
         const color=interpolateColors(node.accent,[0,1],['#aaa4a6',RED]);
-        const pulse=edge.flow?pointOnPath(routes[n.id],edge.flow.progress):null;
+        if(edge.draw<=0 || edge.opacity<=0) return null;
         return <g key={`edge-${n.id}`} data-connection={n.id} data-draw={edge.draw} opacity={ghost?0.16:edge.opacity}>
-          <path d={d} mask={`url(#edge-draw-${n.id})`} fill="none" stroke={color} strokeWidth={4.2} strokeLinejoin="round" strokeDasharray={hasDashedConnection(n.id)?'9 8':undefined}/>
+          <path d={d} mask={edge.draw<1?`url(#edge-draw-${n.id})`:undefined} fill="none" stroke={color} strokeWidth={4.2} strokeLinejoin="round" strokeDasharray={hasDashedConnection(n.id)?'9 8':undefined}/>
           {edge.draw>0 && <g transform={`translate(${edge.tip.x} ${edge.tip.y}) rotate(${edge.tip.angle})`}>
             <path d="M-16 -7 L0 0 L-16 7" fill="none" stroke={RED} strokeWidth={3.5} strokeLinecap="round" strokeLinejoin="round"/>
           </g>}
-          {pulse && edge.flow && <g opacity={edge.flow.opacity}>
-            <circle cx={pulse.x} cy={pulse.y} r={13/cam.scale} fill={RED} opacity={0.12}/>
-            <path d={d} fill="none" stroke={RED} strokeWidth={6} pathLength={1} strokeDasharray="0.055 1" strokeDashoffset={-(edge.flow.progress-0.055)}/>
-            <g transform={`translate(${pulse.x} ${pulse.y}) rotate(${pulse.angle})`}>
-              <path d="M-18 -8 L0 0 L-18 8" fill="none" stroke={RED} strokeWidth={4/cam.scale} strokeLinecap="round" strokeLinejoin="round"/>
-            </g>
-          </g>}
+
         </g>;
       })}
       {layout.map(n=>{

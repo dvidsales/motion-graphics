@@ -18,6 +18,6 @@ assert int(v['nb_read_frames'])==2100
 assert abs(float(data['format']['duration'])-70)<0.001
 assert not any(s['codec_type']=='audio' for s in data['streams'])
 subprocess.run(['ffmpeg','-v','error','-xerror','-i',str(p),'-f','null','-'],check=True)
-report={'arquivo':str(p),'codec':'h264','formato_pixel':'yuv420p','faixa':'tv','espaco_cor':'bt709','resolucao':[1920,1080],'fps':30,'quadros_decodificados':2100,'duracao_segundos':70,'audio':False,'decodificacao_integral':'aprovada','status_editorial':'Piloto v3: conexões progressivas e opacidade animada; não aprovado pelo usuário'}
+report={'arquivo':str(p),'codec':'h264','formato_pixel':'yuv420p','faixa':'tv','espaco_cor':'bt709','resolucao':[1920,1080],'fps':30,'quadros_decodificados':2100,'duracao_segundos':70,'audio':False,'decodificacao_integral':'aprovada','status_editorial':'Piloto v4: conexões sem repetição após a chegada; aprovação editorial pendente'}
 Path('out/hemobras/validation.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n')
 print(json.dumps(report,ensure_ascii=False,indent=2))

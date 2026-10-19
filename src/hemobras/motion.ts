@@ -8,8 +8,6 @@ export const MOTION = {
   focusRise: 16,
   contextOpacity: 0.20,
   cardWipe: 12,
-  flowDuration: 32,
-  flowSpacing: 56,
 };
 export const clamp = (n: number) => Math.max(0, Math.min(1, n));
 export const ramp = (frame: number, start: number, duration: number) => {
@@ -121,17 +119,9 @@ export function connectionMotion(frame: number, id: string) {
   const plan = arrivalFor(id); const node = nodeMotion(frame, id);
   const draw = ramp(frame, plan.edgeStart, Math.max(1, plan.edgeDuration));
   const opacity = frame < plan.edgeStart ? 0 : frame < plan.show ? 1 : node.opacity;
-  let flow: null | {progress: number; opacity: number} = null;
-  for (const window of intervals[id].primary) {
-    const first = Math.max(window.start + 6, plan.edgeStart + plan.edgeDuration + 6);
-    for (let start=first; start+MOTION.flowDuration <= window.end; start+=MOTION.flowSpacing) {
-      if (frame >= start && frame < start+MOTION.flowDuration) {
-        const progress=(frame-start)/MOTION.flowDuration;
-        flow={progress, opacity:Math.min(1, progress*8, (1-progress)*8)};
-      }
-    }
-  }
-  return {draw, opacity, flow, tip:pointOnPath(routes[id], draw)};
+  // O traçado acontece uma única vez. Depois da chegada, a ponta permanece
+  // na borda do cartão; retomar o foco não reinicia a conexão.
+  return {draw, opacity, tip:pointOnPath(routes[id], draw)};
 }
 export const hasDashedConnection = (id: string) => {
   const unit=diagramUnits.find(u=>u.id===id)!;
