@@ -1,13 +1,14 @@
 # Hemobrás — Novo organograma / Hemo TV
 
-Piloto v2 em Remotion 4.0.536, React, TypeScript e SVG. A composição
+Piloto v3 em Remotion 4.0.536, React, TypeScript e SVG. A composição
 `HemobrasAbertura` tem 70 segundos, 1920 × 1080, 30 fps e nenhum áudio.
 
-A revisão combina a abertura em vinho de `PRESIDENCIA-ORGAN-v2.mp4` com
+A base visual combina a abertura em vinho de `PRESIDENCIA-ORGAN-v2.mp4` com
 navegação contínua, zoom, destaques e legendas de
-`hemotv-video1-novo-organograma.mp4`. O Superplasma aparece na abertura,
-na chamada da Presidência e no encerramento. Esta é uma versão para
-avaliação, não um piloto institucional aprovado. Os outros três vídeos
+`hemotv-video1-novo-organograma.mp4`. A v3 acrescenta traçado progressivo das conexões, pontas em movimento e
+áreas que aparecem em 100% antes de reduzir sua opacidade. O Superplasma aparece na abertura,
+na chamada da Presidência e no encerramento. O usuário não aprovou o piloto v2. Esta revisão continua para avaliação,
+sem aprovação automática do piloto. Os outros três vídeos
 aguardam a aprovação explícita deste piloto.
 
 ## Instalação e Studio
@@ -29,6 +30,7 @@ No Studio, selecione `HemobrasAbertura`. A porta é 3000. O cache npm usa
 
 ```bash
 npm run typecheck
+npm run check:motion
 npm run build
 npm run render:piloto
 npm run still:piloto
@@ -43,7 +45,7 @@ limitada BT.709, CRF 18, faststart e ausência de áudio. Concorrência 2.
 - MP4 final: `out/hemobras/01-abertura-revisao.mp4`.
 - Auditoria: `out/hemobras/validation.json`.
 - Quadros de revisão: `out/hemobras/review/`.
-- Entrega v2: `entregas/hemobras-piloto-v2.mp4` quando publicada.
+- Entrega v3: `entregas/hemobras-piloto-v3.mp4` quando publicada.
 
 A validação verifica resolução, duração, taxas média e nominal de quadros,
 2.100 quadros decodificados, ausência de áudio, formato de pixel e cor.
@@ -56,6 +58,7 @@ avaliação de ritmo, leitura em TV e fidelidade institucional pelo usuário.
 - `src/hemobras/data/layout.ts`: contexto oficial, posições e geração de conectores.
 - `src/hemobras/data/cues.ts`: destaques, legendas e intervalos em quadros.
 - `src/hemobras/camera.ts`: posições, escalas e pausas da câmera virtual.
+- `src/hemobras/motion.ts`: entradas, opacidade, traçado e movimento das setas.
 - `src/hemobras/components/CameraDiagram.tsx`: desenho vetorial.
 - `src/hemobras/components/Hero.tsx`: abertura, chamada e encerramento.
 - `src/hemobras/components/Superplasma.tsx`: apresentação do personagem.
@@ -68,7 +71,10 @@ avaliação de ritmo, leitura em TV e fidelidade institucional pelo usuário.
 Para modificar um nome, ajuste os dados e revise a quebra de linhas e o
 enquadramento. Os conectores são gerados a partir dos mesmos `parent` das
 unidades. Aumentar nomes pode exigir alterar largura, altura e tamanho de
-fonte em `layout.ts`. A hierarquia não deve ser deduzida da posição visual.
+fonte em `layout.ts`. A hierarquia não deve ser deduzida da posição visual. Ao acrescentar uma
+unidade, registre sua entrada em `motion.ts`; assim ela não nasce esmaecida.
+Os parâmetros `fullOpacityHold`, `fadeDuration` e `contextOpacity` controlam
+respectivamente exposição inicial integral, fade e transparência do contexto.
 O término de cada intervalo é exclusivo; 70 segundos são 2.100 quadros.
 
 ## Arte do Superplasma
@@ -107,6 +113,7 @@ npm run validate:piloto
 
 Os quatro roteiros são abertura, Industrial, Qualidade e Suprimentos, e
 Gestão Corporativa e Financeira. Apenas o primeiro está implementado.
-A versão anterior entregue permanece no histórico e em
-`entregas/hemobras-piloto-revisao.mp4`. O projeto inicial `MotionIntro`
+As versões anteriores foram preservadas em
+`entregas/hemobras-piloto-revisao.mp4` e `entregas/hemobras-piloto-v2.mp4`.
+Veja `docs/revisao-v3.md` para o feedback e as mudanças da revisão atual. O projeto inicial `MotionIntro`
 também foi preservado como composição separada.

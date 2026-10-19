@@ -1,46 +1,51 @@
-# Revisão técnica — piloto v2
+# Revisão técnica — piloto v3
 
-## Verificações
+O piloto v2 foi rejeitado pelo usuário quanto ao resultado visual. O tempo
+de leitura foi considerado bom. O piloto continua **não aprovado**.
+
+## Verificações da revisão
 
 - `npm run typecheck`: aprovado.
+- `npm run check:motion`: aprovado para 40 áreas e 39 conexões.
 - `npm run build`: aprovado.
-- `node scripts/review-pilot.mjs`: gerou 20 quadros distribuídos pela timeline.
-- `npm run still:piloto`: gerou o convite com o Superplasma.
+- `node scripts/review-pilot.mjs`: gerou 41 amostras de quadros.
 - `npm run render:piloto`: exportação e finalização do MP4.
 - `npm run validate:piloto`: resultado corrente em `validacao-render.json`.
 
-Amostras geradas: 0, 60, 140, 220, 300, 400, 540, 640, 720, 870, 1000,
-1060, 1150, 1280, 1380, 1500, 1640, 1800, 1980 e 2099. A inspeção visual
-abrangeu convite, topo, Conselho de Administração, os dois grupos de comitês,
-chamada da Presidência, os grupos da Presidência, diretorias e encerramento.
+As amostras incluem quadros próximos para comparação temporal: 280/310/350
+(exposição integral e esmaecimento do topo), 578/586/598/622 (conexões se
+formando), 650/690/720 (áreas apresentadas e depois reduzindo opacidade),
+792/808/824/850/875 e 940/964/990 (comitês), e entrada e foco dos grupos da
+Presidência. Também foram geradas amostras das diretorias e do fechamento.
 
-Na inspeção, corrigiu-se o enquadramento do Conselho de Administração para
-manter os cartões do foco dentro da tela. A conexão Diretoria Executiva →
-Presidência é contínua; apenas os comitês desse grupo usam linha tracejada.
-Os nós esmaecidos são contexto espacial e podem sair do enquadramento;
-os nomes que são alvo de leitura recebem enquadramentos próprios estáveis.
+A inspeção visual verificou linhas parcialmente desenhadas, pontas avançando
+nos caminhos, presença das áreas com opacidade integral e estados de fade.
+A verificação geométrica automatizada confirma que o movimento percorre
+somente os segmentos das conexões existentes e termina na borda dos cartões.
 
-## Recursos do personagem
+## Preservação
 
-O Superplasma está efetivamente renderizado em três momentos, usando a
-arte do vídeo de referência. É uma pose estática com entrada e movimento
-do elemento inteiro. Não foi substituído por texto ou marcador genérico.
-A origem e o enquadramento são documentados em `revisao-v2.md`.
+Câmera, intervalos editoriais e legendas não mudaram em relação à v2. Nomes
+e relações também permanecem os mesmos. A duração total continua sendo
+2.100 quadros a 30 fps, sem áudio. A validação técnica do MP4 é registrada
+separadamente da aprovação editorial.
 
-## Revisão humana pendente
+A abertura, a chamada e o encerramento mantêm o Superplasma real recuperado
+da referência, como documentado em `revisao-v2.md`. Trata-se de uma pose
+animada como elemento inteiro, sem alegar articulação independente do corpo.
 
-O conforto de leitura à distância, ritmo, estilo e fidelidade institucional
-continuam sujeitos à avaliação explícita do usuário. A apresentação geral
-dos seis comitês é uma síntese após os enquadramentos de leitura em grupos
-de três. Unidades menores em cinza não dependem de leitura nessa síntese.
+## Avaliação pendente
 
-A expressão histórica de novas áreas permanece a do roteiro: não foi
-fornecido um organograma anterior que permita comparar datas de criação.
+A adequação do dinamismo, estilo e resultado geral continua dependente da
+avaliação explícita do usuário. Passar nos testes não aprova o piloto.
+Os demais três vídeos não foram iniciados.
 
-Os demais três vídeos não foram iniciados. A revisão v2 não representa
-aprovação automática do piloto nem autorização para avançar na série.
+## Resultado da exportação
 
-## Reprodutibilidade do projeto
+MP4 v3 decodificado integralmente com sucesso: H.264, 1920 × 1080,
+30 fps, 2.100 quadros, 70 segundos, sem áudio, yuv420p, BT.709 e faixa
+limitada. Quadros 280, 310 e 350 foram extraídos do MP4 final e inspecionados
+para confirmar o traçado parcial, a exposição integral e o esmaecimento.
 
-O ZIP foi extraído em diretório separado em `/tmp`; `npm ci` com lockfile
-e `npm run typecheck` passaram. O arquivo ZIP teve sua integridade verificada.
+As fontes foram extraídas em diretório separado, reinstaladas com `npm ci`
+e verificadas com TypeScript e `check:motion`. Todos passaram.

@@ -8,11 +8,12 @@ npm run dev -- --no-open
 ```
 
 No Studio, selecione **HemobrasAbertura**: piloto institucional de 70 segundos,
-Full HD, 30 fps e sem áudio. A revisão v2 já inclui o Superplasma recuperado
+Full HD, 30 fps e sem áudio. A revisão v3 inclui movimento nas conexões, opacidade animada e o Superplasma recuperado
 do vídeo de referência e navegação contínua pelo organograma.
 
 ```bash
 npm run typecheck
+npm run check:motion
 npm run build
 npm run render:piloto
 npm run validate:piloto
@@ -20,7 +21,7 @@ npm run validate:piloto
 
 O resultado é `out/hemobras/01-abertura-revisao.mp4`. Instruções completas,
 estrutura editável, arte do personagem e parâmetros de exportação estão no
-[README](README.md). Veja `docs/revisao-v2.md` para a direção visual.
+[README](README.md). Veja `docs/revisao-v3.md` para o controle de movimento e opacidade.
 
 Requisitos: Node.js 24, Chromium em `/usr/bin/chromium`, FFmpeg/ffprobe e
 Python 3. A fonte Poppins é instalada localmente pelo npm. Não são

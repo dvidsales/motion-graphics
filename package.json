@@ -10,7 +10,8 @@
     "still": "remotion still src/index.ts MotionIntro out/poster.png --frame=75 --browser-executable=/usr/bin/chromium",
     "render:piloto": "remotion render src/index.ts HemobrasAbertura out/hemobras/01-abertura-remotion.mp4 --browser-executable=/usr/bin/chromium --concurrency=2 --codec=h264 --pixel-format=yuv420p --crf=18 --muted && node scripts/finalize-pilot.mjs",
     "still:piloto": "remotion still src/index.ts HemobrasAbertura out/hemobras/piloto-poster.png --frame=140 --browser-executable=/usr/bin/chromium",
-    "validate:piloto": "python3 scripts/validate-pilot.py"
+    "validate:piloto": "python3 scripts/validate-pilot.py",
+    "check:motion": "node scripts/validate-motion.mjs"
   },
   "dependencies": {
     "@fontsource/poppins": "5.3.0",

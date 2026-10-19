@@ -1,0 +1,13 @@
+{
+  "arquivo": "hemobras-piloto-v3.mp4",
+  "bytes": 6937333,
+  "sha256": "f90bbcd871119736415d3db726386d314c84d9bda49888fa51982dad6114e9a4",
+  "aprovacao": "Pendente; piloto não aprovado",
+  "mudancas": [
+    "Conexões desenhadas progressivamente",
+    "Pontas das setas e pulsos em movimento",
+    "Primeira exposição de todas as áreas em opacidade 100%",
+    "Redução gradual para contexto e retomada suave de foco"
+  ],
+  "duracao_segundos": 70
+}
