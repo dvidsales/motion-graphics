@@ -1,0 +1,27 @@
+{
+  "name": "motion-graphics",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio src/index.ts --port=3000",
+    "typecheck": "tsc --noEmit",
+    "build": "remotion bundle src/index.ts",
+    "render": "remotion render src/index.ts MotionIntro out/motion-intro.mp4 --browser-executable=/usr/bin/chromium --concurrency=2",
+    "still": "remotion still src/index.ts MotionIntro out/poster.png --frame=75 --browser-executable=/usr/bin/chromium",
+    "render:piloto": "remotion render src/index.ts HemobrasAbertura out/hemobras/01-abertura-remotion.mp4 --browser-executable=/usr/bin/chromium --concurrency=2 --codec=h264 --pixel-format=yuv420p --crf=18 --muted && node scripts/finalize-pilot.mjs",
+    "still:piloto": "remotion still src/index.ts HemobrasAbertura out/hemobras/piloto-poster.png --frame=140 --browser-executable=/usr/bin/chromium",
+    "validate:piloto": "python3 scripts/validate-pilot.py"
+  },
+  "dependencies": {
+    "@fontsource/poppins": "5.3.0",
+    "@remotion/cli": "4.0.536",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "remotion": "4.0.536"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3"
+  }
+}

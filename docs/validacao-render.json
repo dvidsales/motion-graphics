@@ -1,0 +1,17 @@
+{
+  "arquivo": "out/hemobras/01-abertura-revisao.mp4",
+  "codec": "h264",
+  "formato_pixel": "yuv420p",
+  "faixa": "tv",
+  "espaco_cor": "bt709",
+  "resolucao": [
+    1920,
+    1080
+  ],
+  "fps": 30,
+  "quadros_decodificados": 2100,
+  "duracao_segundos": 70,
+  "audio": false,
+  "decodificacao_integral": "aprovada",
+  "status_editorial": "Piloto v2: Superplasma integrado a partir da referência; aguardando aprovação editorial"
+}
